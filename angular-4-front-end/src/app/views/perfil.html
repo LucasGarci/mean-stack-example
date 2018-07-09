@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" [routerLink]="['/anuncios']" [routerLinkActive]="['activado']">
+			<img src="http://localhost:3977/api/get-image-anuncio/talogo.png" width="35" height="30" class="d-inline-block align-top" alt=""
+			/> TodoAnuncios </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+		 aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon">
+			</span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+				<button class="btn btn-sm btn-outline-success " [routerLink]="['/anuncio-add']" [routerLinkActive]="['activado']">Nuevo anuncio</button>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-light" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">
+						Configuracion
+					</a>
+					<div class="dropdown-menu bg-dark " aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item text-light" [routerLink]="['/perfil']" [routerLinkActive]="['activado']">Perfil</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item text-light" (click)='salir()'>SALIR</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container py-5 mt-5">
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6 mx-auto text-center ">
+          <a href="#aboutModal" data-toggle="modal" data-target="#myModal">
+            <img src="http://localhost:3977/api/get-image-anuncio/{{usuario.imagen}}" name="aboutme" width="200" height="200" class="border border-dark rounded-circle mb-1">
+          </a>
+          <h3>{{usuario.nombre}}</h3>
+          <em class="bg-dark text-light rounded px-5 text-center border border-danger">Click en tu perfil para saber más</em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <form #formUser="ngForm" (ngSubmit)="onSubmit()">
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title" id="myModalLabel">Correo: {{usuario.mail}}</h4>
+          </div>
+          <div class="modal-body text-center">
+            <img src="http://localhost:3977/api/get-image-anuncio/{{usuario.imagen}}" name="aboutme" width="180" height="180" border="0" class="rounded-circle mb-2 border border-light">
+            <h3 class="media-heading">{{usuario.nombre}}
+              <small class="bg-success rounded p-1">Role: {{usuario.rol}}</small>
+            </h3>
+            <div class="text-left mt-2 mb-2">
+              <label for="exampleFormControlFile1">Nueva foto de perfil:</label>
+              <input type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+            </div>
+
+            <p class="text-left">
+              <strong>Nombre:</strong>
+            </p>
+            <input type="text" class="form-control" #nombre="ngModel" name="nombre" [(ngModel)]="usuario.nombre" value="(usuario.nombre)"
+              required="true" maxlength="24">
+            <br>
+
+            <p class="text-left">
+              <strong>Apellidos:</strong>
+            </p>
+            <input type="text" class="form-control " #apellido="ngModel" name="apellido" [(ngModel)]="usuario.apellido" value="(usuario.apellido)"
+              required="true" maxlength="45">
+            <br>
+
+            <p class="text-left">
+              <strong>Contraseña:</strong>
+            </p>
+            <input type="password" class="form-control" id="exampleInputPassword1" #newpass="ngModel" name="newpass" [(ngModel)]="usuario.newpass"
+              placeholder="Rellenar solo en caso de querer cambiar la contraseña">
+            <br>
+          </div>
+          <div class="modal-footer">
+
+            <button type="submit" class="btn btn-warning">Editar cuenta</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

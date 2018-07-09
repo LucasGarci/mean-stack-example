@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand text-white">
+			<img src="http://localhost:3977/api/get-image-anuncio/talogo.png" width="35" height="30" class="d-inline-block align-top" alt=""
+			/> TodoAnuncios </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+		 aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon">
+			</span>
+		</button>
+
+	</div>
+</nav>
+
+<div class="container py-5 mt-5 ">
+	<div class="row mt-5">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6 mx-auto ">
+					<!--  CARD  -->
+					<div class="card rounded border-0 align-middle bg-dark text-white">
+						<div class="card-header rounded ">
+							<h3 class="mb-0">Anúnciate gratis en TodoAnuncios</h3>
+						</div>
+						<div class="card-body rounded border-0">
+							<form #formLogin="ngForm" (ngSubmit)="onSubmit()">
+								<div class="form-group">
+									<label for="uname1">Usuario: </label>
+									<input type="text" class="form-control form-control-lg rounded" #mail="ngModel" name="mail" [(ngModel)]="usuario.mail" required="true"
+									 maxlength="25" placeholder="Username"> </div>
+								<div class="form-group ">
+									<label>Contraseña: </label>
+									<input type="password" class="form-control form-control-lg rounded" #pass="ngModel" name="pass" [(ngModel)]="usuario.pass"
+									 required="true" placeholder="Your password"> </div>
+								<button type="submit" class="btn btn-success btn-lg container-fluid">Entrar</button>
+							</form>
+
+							<button type="submit" class="btn btn-link container-fluid mt-3" data-toggle="modal" data-target="#exampleModalCenter">Registrar nueva cuenta</button>
+
+							<!--Modal -->
+							<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered " role="document">
+									<div class="modal-content bg-dark text-light">
+										<form #formCreateUser="ngForm" (ngSubmit)="onSaveUser()">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Creacion de cuenta</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="uname1">Nombre: </label>
+													<input type="text" class="form-control " #nombre="ngModel" name="nombre" [(ngModel)]="usuario.nombre" required="true" maxlength="25"
+													 placeholder="Nombre"> </div>
+												<div class="form-group">
+													<label for="uname1">Apellidos: </label>
+													<input type="text" class="form-control " #apellido="ngModel" name="apellido" [(ngModel)]="usuario.apellido" required="true"
+													 maxlength="45" placeholder="Apellidos"> </div>
+												<div class="form-group">
+													<label for="exampleInputEmail1">Direccion de email</label>
+													<input type="email" class="form-control" #mail="ngModel" name="mail" [(ngModel)]="usuario.mail" placeholder="Enter email"> </div>
+												<div class="form-group">
+													<label for="exampleInputPassword1">Contraseña</label>
+													<input type="password" class="form-control" id="exampleInputPassword1" #pass="ngModel" name="pass" [(ngModel)]="usuario.pass"
+													 placeholder="Password">
+													<small id="emailHelp" class="form-text text-muted">Nunca comparta su contraseña con nadie.</small>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-primary" >Crear cuenta</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

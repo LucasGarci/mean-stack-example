@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+	<div class="container">
+		<a class="navbar-brand" [routerLink]="['/anuncios']" [routerLinkActive]="['activado']">
+			<img src="http://localhost:3977/api/get-image-anuncio/talogo.png" width="35" height="30" class="d-inline-block align-top" alt=""
+			/> TodoAnuncios </a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+		 aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon">
+			</span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+				<button class="btn btn-sm btn-outline-success " [routerLink]="['/anuncio-add']" [routerLinkActive]="['activado']">Nuevo anuncio</button>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-light" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true"
+					 aria-expanded="false">
+						Configuracion
+					</a>
+					<div class="dropdown-menu bg-dark " aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item text-light" [routerLink]="['/perfil']" [routerLinkActive]="['activado']">Perfil</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item text-light" (click)='salir()'>SALIR</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container py-4 mt-4">
+	<div class="row mt-4">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12 mx-auto">
+					<!--  CARD  -->
+					<div class="card rounded border-0 align-middle bg-dark text-light">
+						<div class="md-4">
+							<img class="card-img-top"  *ngIf="(anuncio.imagen != 'null')" src="http://localhost:3977/api/get-image-anuncio/{{anuncio.imagen}}">
+						</div>
+						<div class="card-body bg-dark text-light">
+							<!--FORMULARIO EDIT-->
+							<form #formAnuncio="ngForm" (ngSubmit)="onSubmit()">
+								<div class="" role="document">
+									<div class=" bg-dark text-light">
+										<div class="modal-header">
+											<h5 class="modal-title">Editar Anuncio</h5>
+										</div>
+										<div class="modal-body">
+											<div class="form-group row">
+												<div class="col-sm-6">
+													<label class="row-sm-6 col-form-label col-form-label-sm">Titulo:</label>
+													<input #titulo="ngModel" name="titulo" [(ngModel)]="anuncio.titulo" type="text" class="form-control form-control-sm" placeholder="Nombre"
+													 name="nombre" required="true" maxlength="24" value="(anuncio.titulo)"> </div>
+												<div class="col-sm-6">
+													<label class="row-sm-6 col-form-label col-form-label-sm">Precio:</label>
+													<div class="input-group ">
+														<input #precio="ngModel" name="precio" [(ngModel)]="anuncio.precio" value="(anuncio.precio)" type="number" step=".01" class="form-control form-control-sm"
+														 placeholder="50" name="preciomatricula" required="true">
+														<div class="input-group-addon form-control-sm">€</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-sm-12">
+													<label class="row-sm-6 col-form-label col-form-label-sm"> Categoria: </label>
+													<select #categoria="ngModel" [(ngModel)]="anuncio.categoria" id="selectbasic" class="form-control form-control-sm" name="categoria"
+													 required="true">
+														<option value="Arte y Antiguedades">Arte y Antigüedades</option>
+														<option value="Productos infantiles">Productos infantiles</option>
+														<option value="Belleza y Salud">Belleza y Salud</option>
+														<option value="Camaras y Fotografaa">Cámaras y Fotografía</option>
+														<option value="Casa, Jardin y Bricolaje">Casa, Jardín y Bricolaje</option>
+														<option value="Cine, DVD y Peliculas">Cine, DVD y Películas</option>
+														<option value="Motos y Recambios">Motos y Recambios</option>
+														<option value="Coleccionismo">Coleccionismo</option>
+														<option value="Consolas y Videojuegos">Consolas y Videojuegos</option>
+														<option value="Deportes">Deportes</option>
+														<option value="Entradas">Entradas</option>
+														<option value="Equipamiento y Maquinaria">Equipamiento y Maquinaría</option>
+														<option value="Imagen y sonido">Imagen y sonido</option>
+														<option value="Informatica y tablets">Informática y tablets</option>
+														<option value="Instrumentos Musicales">Instrumentos Musicales</option>
+														<option value="Juguetes">Juguetes</option>
+														<option value="Libros, Revistas y Comics">Libros, Revistas y Cómics</option>
+														<option value="Monedas y Billetes">Monedas y Billetes</option>
+														<option value="Moviles y telefonia">Móviles y telefonía</option>
+														<option value="Musica, CD y Vinilos">Música, CD y Vinilos</option>
+														<option value="Relojes y Joyas">Relojes y Joyas</option>
+														<option value="Ropa, Zapatos y Complementos">Ropa, Zapatos y Complementos</option>
+														<option value="Sellos">Sellos</option>
+														<option value="Viajes">Viajes</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group row">
+												<div class="col-sm-12">
+													<label for="message-text" class="col-form-label">Descripcion:</label>
+													<textarea #cuerpo="ngModel" name="cuerpo" [(ngModel)]="anuncio.cuerpo" class="form-control" value="{{anuncio.cuerpo}}" placeholder="Agregue una descripcion para su anuncio..."></textarea> </div>
+											</div>
+											<div class="form-group row">
+												<div class="col-sm-12">
+													<label for="exampleFormControlFile1">Selecciona una imagen</label>
+													<input type="file" class="form-control-file" (change)="fileChangeEvent($event)" > </div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="submit" class="btn btn-primary" >Editar Anuncio</button>
+											<button type="button" class="btn btn-danger" data-dismiss="modal" [routerLink]="['/anuncios']">Cancelar</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<!--FFIN FORMULARIO-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
